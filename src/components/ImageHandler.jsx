@@ -259,7 +259,7 @@ const ImageHandler = () => {
           >
             {"<"}
           </button>
-          <div className="flex flex-col items-center justify-center md:w-2/3 md:h-[90vh] my-auto overflow-hidden md:p-2">
+          <div className="flex flex-col items-center justify-center md:w-2/3 md:h-[95vh] my-auto overflow-hidden md:p-2">
             <img
               src={images[selectedIndex]}
               alt={`Selected Image ${selectedIndex}`}
