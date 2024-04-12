@@ -18,7 +18,7 @@ const HeroSection = () => {
         </p>
         <p className="text-lg mb-6">
           We invite you to view our Aqdun Nikkah gallery and relive the beautiful
-          moments we shared on this joyous occasion.
+          moments we shared on this joyous occasion...
         </p>
         <a
           href="/gallery"
