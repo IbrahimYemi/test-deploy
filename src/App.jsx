@@ -14,7 +14,7 @@ import StartupAnimation from './components/StartupAnimation';
 function App() {
 
   return (
-    <div className='min-h-screen bg-white max-w-screen-2xl mx-auto'>
+    <div className='min-h-screen bg-white max-w-screen-2xl mx-auto font-mono'>
       <ErrorBoundary>
         <BrowserRouter>
           <Navbar />
