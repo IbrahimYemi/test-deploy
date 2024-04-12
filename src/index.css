@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.startup-animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.startup-animation {
+  animation: startup-animation 6s ease-out forwards;
+  opacity: 1;
+}
+
+@keyframes startup-animation {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+.startup-text {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #d3a755;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .startup-text {
+    font-size: 2rem;
+  }
+}
+
+.image-background {
+  background-image: url('/wine-flower.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+}

@@ -18,15 +18,27 @@ function App() {
       <ErrorBoundary>
         <BrowserRouter>
           <Navbar />
-          <StartupAnimation />
-          <Routes>
-            {/* public routes */}
-            <Route element={<LoginRoutes />}>
-              <Route path={frontendURIs.home} element={<StartupAnimation />} />
-              <Route path={frontendURIs.gallery} element={<ImageHandler />} />
-              <Route path={frontendURIs.login} element={<LoginPage />} />
-            </Route>
-          </Routes>
+          <div className='relative'>
+            <img src="/wine-flower.jpg" alt="peach flower" className='absolute inset-0 w-full h-full object-cover opacity-10 z-0' />
+            <div className='min-h-screen relative z-10 p-4'>
+              <Routes>
+                {/* public routes */}
+                <Route element={<LoginRoutes />}>
+                  <Route path={frontendURIs.home} element={<StartupAnimation />} />
+                  <Route path={frontendURIs.gallery} element={<ImageHandler />} />
+                  <Route path={frontendURIs.login} element={<LoginPage />} />
+                </Route>
+
+                {/* private routes */}
+                <Route element={<ProtectedRoutes />}>
+                  {/* admin routes */}
+                  <Route path={frontendURIs.admin} element={<StartupAnimation />} />
+                </Route>
+                <Route path={frontendURIs.notFound} element={<NotFoundPage />} />
+              </Routes>
+            </div>
+          </div>
+
         </BrowserRouter>
         <Footer />
       </ErrorBoundary>
