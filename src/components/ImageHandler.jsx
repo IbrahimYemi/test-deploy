@@ -165,6 +165,7 @@ const images = [
 
 const ImageHandler = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [touchStartX, setTouchStartX] = useState(null);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -208,8 +209,31 @@ const ImageHandler = () => {
     );
   };
 
+  const handleTouchStart = (event) => {
+    setTouchStartX(event.touches[0].clientX);
+  };
+
+  const handleTouchMove = (event) => {
+    if (touchStartX === null) return;
+
+    const touchEndX = event.touches[0].clientX;
+    const touchDiffX = touchEndX - touchStartX;
+
+    if (touchDiffX > 50) {
+      goToPrev();
+    } else if (touchDiffX < -50) {
+      goToNext();
+    }
+
+    setTouchStartX(null);
+  }
+
   return (
-    <div className="bg-white-wine flex flex-col justify-center items-center">
+    <div
+      className="bg-white-wine flex flex-col justify-center items-center"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+    >
       <h1 className="text-4xl md:text-6xl text-[#d3a755] text-center mx-auto font-bold mb-10 shadow-lg p-2">
         Image Gallery ({images.length})
       </h1>
