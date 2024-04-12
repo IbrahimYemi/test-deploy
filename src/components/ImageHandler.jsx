@@ -166,6 +166,7 @@ const images = [
 const ImageHandler = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [touchStartX, setTouchStartX] = useState(null);
+  const [autoplayInterval, setAutoplayInterval] = useState(null);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -203,6 +204,29 @@ const ImageHandler = () => {
     setSelectedIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
+  };
+
+  // Function to start autoplay
+  const startAutoplay = () => {
+    const intervalId = setInterval(goToNext, 1500);
+    setAutoplayInterval(intervalId);
+  };
+
+  // Function to stop autoplay
+  const stopAutoplay = () => {
+    clearInterval(autoplayInterval);
+    setAutoplayInterval(null);
+  };
+
+
+  // Function to handle play button click
+  const playImages = () => {
+    startAutoplay();
+  };
+
+  // Function to handle stop button click
+  const stopImages = () => {
+    stopAutoplay();
   };
 
   const handleTouchStart = (event) => {
@@ -247,7 +271,7 @@ const ImageHandler = () => {
       </div>
       {selectedIndex !== null && (
         <div
-          className="fixed top-0 left-0 w-full h-full bg-opacity-95 bg-[#d3a755] p-2 flex justify-center items-center md:p-8 z-50 cursor-grab"
+          className="fixed top-0 left-0 w-full h-full bg-opacity-95 bg-[#d3a755] p-2 flex flex-col justify-center items-center md:p-8 z-50"
           onClick={closeImage}
         >
           <button
@@ -263,7 +287,7 @@ const ImageHandler = () => {
             <img
               src={images[selectedIndex]}
               alt={`Selected Image ${selectedIndex}`}
-              className="max-w-3/4 h-auto md:h-[25rem] rounded-lg"
+              className="max-w-full w-auto h-auto md:h-[20rem] rounded-lg"
             />
             <div className="flex justify-between items-center w-full mt-5 md:mt-10">
               {selectedIndex > 0 && (
@@ -274,13 +298,13 @@ const ImageHandler = () => {
                     e.stopPropagation();
                     openImage(selectedIndex - 1);
                   }}
-                  className="w-1/4 max-h-3/4 rounded-lg cursor-pointer"
+                  className="w-1/4 max-h-[70vh] rounded-lg cursor-pointer"
                 />
               )}
               <img
                 src={images[selectedIndex]}
                 alt={`Selected Image ${selectedIndex}`}
-                className="w-1/4 max-h-3/4 rounded-lg cursor-pointer"
+                className="w-1/4 max-h-[70vh] rounded-lg cursor-pointer"
               />
               {selectedIndex < images.length - 1 && (
                 <img
@@ -290,7 +314,7 @@ const ImageHandler = () => {
                     e.stopPropagation();
                     openImage(selectedIndex + 1);
                   }}
-                  className="w-1/4 max-h-3/4 rounded-lg cursor-pointer"
+                  className="w-1/4 max-h-[70vh] rounded-lg cursor-pointer"
                 />
               )}
             </div>
@@ -304,6 +328,23 @@ const ImageHandler = () => {
           >
             {">"}
           </button>
+          {/* Play and stop buttons */}
+          <div className="-mt-8 md:-mt-0 flex items-center gap-2">
+            {
+              autoplayInterval == null ? (
+                <button onClick={(e) => {
+                  e.stopPropagation();
+                  playImages();
+                }} className="bg-red-900 text-white rounded-md p-2">
+                  Play
+                </button>) : (
+                <button onClick={(e) => {
+                  e.stopPropagation();
+                  stopImages();
+                }} className="bg-red-900 text-white rounded-md p-2">Stop
+                </button>)
+            }
+          </div>
         </div>
       )}
     </div>
