@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const images = [
   "https://picsum.photos/id/1018/1000/600/",
@@ -167,6 +167,8 @@ const ImageHandler = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [touchStartX, setTouchStartX] = useState(null);
   const [autoplayInterval, setAutoplayInterval] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audio = useRef(new Audio("/songing.mp3")).current;
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -191,8 +193,10 @@ const ImageHandler = () => {
   };
 
   const closeImage = () => {
+    setIsPlaying(false);
     setSelectedIndex(null);
     stopAutoplay();
+    stopAudio();
   };
 
   const goToNext = () => {
@@ -219,20 +223,23 @@ const ImageHandler = () => {
     setAutoplayInterval(null);
   };
 
-
   // Function to handle play button click
   const playImages = () => {
-    // Play the song
-    const audio = new Audio("/songing.mp3");
+    setIsPlaying(true);
     audio.play();
-  
-    // Start autoplay
     startAutoplay();
   };
 
   // Function to handle stop button click
   const stopImages = () => {
+    setIsPlaying(false);
     stopAutoplay();
+    stopAudio();
+  };
+
+  const stopAudio = () => {
+    audio.pause();
+    audio.currentTime = 0;
   };
 
   const handleTouchStart = (event) => {
@@ -336,25 +343,33 @@ const ImageHandler = () => {
           </button>
           {/* Play and stop buttons */}
           <div className="-mt-8 md:-mt-0 flex items-center gap-2">
-            {
-              autoplayInterval == null ? (
-                <button onClick={(e) => {
-                  e.stopPropagation();
-                  playImages();
-                }} className="bg-red-900 text-white rounded-md p-2">
-                  Play
-                </button>) : (
-                <button onClick={(e) => {
+            {isPlaying ? (
+              <button
+                onClick={(e) => {
                   e.stopPropagation();
                   stopImages();
-                }} className="bg-red-900 text-white rounded-md p-2">Stop
-                </button>)
-            }
+                }}
+                className="bg-red-900 text-white rounded-md p-2"
+              >
+                Stop
+              </button>
+            ) : (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  playImages();
+                }}
+                className="bg-red-900 text-white rounded-md p-2"
+              >
+                Play
+              </button>
+            )}
           </div>
         </div>
       )}
     </div>
   );
 };
+
 
 export default ImageHandler;
