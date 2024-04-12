@@ -19,6 +19,14 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <StartupAnimation />
+          <Routes>
+            {/* public routes */}
+            <Route element={<LoginRoutes />}>
+              <Route path={frontendURIs.home} element={<StartupAnimation />} />
+              <Route path={frontendURIs.gallery} element={<ImageHandler />} />
+              <Route path={frontendURIs.login} element={<LoginPage />} />
+            </Route>
+          </Routes>
         </BrowserRouter>
         <Footer />
       </ErrorBoundary>
