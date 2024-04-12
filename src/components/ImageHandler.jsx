@@ -192,6 +192,7 @@ const ImageHandler = () => {
 
   const closeImage = () => {
     setSelectedIndex(null);
+    stopAutoplay();
   };
 
   const goToNext = () => {
@@ -208,7 +209,7 @@ const ImageHandler = () => {
 
   // Function to start autoplay
   const startAutoplay = () => {
-    const intervalId = setInterval(goToNext, 1500);
+    const intervalId = setInterval(goToNext, 2000);
     setAutoplayInterval(intervalId);
   };
 
@@ -221,6 +222,11 @@ const ImageHandler = () => {
 
   // Function to handle play button click
   const playImages = () => {
+    // Play the song
+    const audio = new Audio("/songing.mp3");
+    audio.play();
+  
+    // Start autoplay
     startAutoplay();
   };
 
