@@ -1,6 +1,6 @@
 const HeroSection = () => {
   return (
-    <div className="bg-white-wine py-8 md:py-12 md:px-24 lg:px-32 flex flex-col md:flex-row items-center">
+    <div className="bg-white-wine md:py-12 md:px-24 lg:px-32 flex flex-col md:flex-row items-center">
       <div className="md:w-1/2 mb-8 md:mb-0">
         <img
           src="https://burst.shopifycdn.com/photos/cute-couple-piggypack.jpg?width=1000&format=pjpg&exif=0&iptc=0"

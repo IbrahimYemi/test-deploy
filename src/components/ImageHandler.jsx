@@ -171,14 +171,10 @@ const ImageHandler = () => {
     const handleKeyDown = (event) => {
       if (event.key === "ArrowLeft") {
         // Navigate to the previous image
-        setSelectedIndex((prevIndex) =>
-          prevIndex === 0 ? images.length - 1 : prevIndex - 1
-        );
+        goToPrev();
       } else if (event.key === "ArrowRight") {
         // Navigate to the next image
-        setSelectedIndex((prevIndex) =>
-          prevIndex === images.length - 1 ? 0 : prevIndex + 1
-        );
+        goToNext();
       }
     };
 
@@ -219,14 +215,14 @@ const ImageHandler = () => {
     const touchEndX = event.touches[0].clientX;
     const touchDiffX = touchEndX - touchStartX;
 
-    if (touchDiffX > 50) {
+    if (touchDiffX > 100) {
       goToPrev();
-    } else if (touchDiffX < -50) {
+    } else if (touchDiffX < -100) {
       goToNext();
     }
 
     setTouchStartX(null);
-  }
+  };
 
   return (
     <div
@@ -251,7 +247,7 @@ const ImageHandler = () => {
       </div>
       {selectedIndex !== null && (
         <div
-          className="fixed top-0 left-0 w-full h-full bg-opacity-95 bg-[#d3a755] p-2 flex justify-center items-center z-50 cursor-pointer"
+          className="fixed top-0 left-0 w-full h-full bg-opacity-95 bg-[#d3a755] p-2 flex justify-center items-center md:p-8 z-50 cursor-grab"
           onClick={closeImage}
         >
           <button
@@ -263,11 +259,42 @@ const ImageHandler = () => {
           >
             {"<"}
           </button>
-          <img
-            src={images[selectedIndex]}
-            alt={`Selected Image ${selectedIndex}`}
-            className="max-w-3/4 max-h-3/4 rounded-lg"
-          />
+          <div className="flex flex-col items-center justify-center md:w-2/3 md:h-[90vh] my-auto overflow-hidden md:p-2">
+            <img
+              src={images[selectedIndex]}
+              alt={`Selected Image ${selectedIndex}`}
+              className="max-w-3/4 h-auto md:h-[25rem] rounded-lg"
+            />
+            <div className="flex justify-between items-center w-full mt-5 md:mt-10">
+              {selectedIndex > 0 && (
+                <img
+                  src={images[selectedIndex - 1]}
+                  alt={`Image ${selectedIndex - 1}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openImage(selectedIndex - 1);
+                  }}
+                  className="w-1/4 max-h-3/4 rounded-lg cursor-pointer"
+                />
+              )}
+              <img
+                src={images[selectedIndex]}
+                alt={`Selected Image ${selectedIndex}`}
+                className="w-1/4 max-h-3/4 rounded-lg cursor-pointer"
+              />
+              {selectedIndex < images.length - 1 && (
+                <img
+                  src={images[selectedIndex + 1]}
+                  alt={`Image ${selectedIndex + 1}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openImage(selectedIndex + 1);
+                  }}
+                  className="w-1/4 max-h-3/4 rounded-lg cursor-pointer"
+                />
+              )}
+            </div>
+          </div>
           <button
             className="absolute top-0 right-0 text-red-800 font-semibold text-2xl px-4 py-2 bg-white rounded-full m-2 flex items-center justify-center"
             onClick={(e) => {
