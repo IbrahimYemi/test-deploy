@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useRef, useState } from "react";
 import axios from '../config/axiosConfig';
-import { backendURIs } from "../config/routes";
+import { backendURIs, frontendURIs } from "../config/routes";
 import { imageSRCHandler } from "../config/imageResolver";
+import { Link } from "react-router-dom";
 
 const ImageHandler = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,6 +12,8 @@ const ImageHandler = () => {
   const [autoplayInterval, setAutoplayInterval] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const audio = useRef(new Audio("/songing.mp3")).current;
+
+  const token = localStorage.getItem('token');
 
   const [images, setImages] = useState([]);
 
@@ -126,6 +129,7 @@ const ImageHandler = () => {
       <h1 className="text-2xl md:text-4xl text-[#d3a755] text-center mx-auto font-bold mb-10 shadow-lg p-2">
         Image Gallery ({images.length})
       </h1>
+      {token !== null && <Link className="text-[#d3a755] underline hover:text-red-800" to={frontendURIs.admin}>Admin</Link>}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {images.map((image, index) => (
           <div key={index} className="relative cursor-pointer">
