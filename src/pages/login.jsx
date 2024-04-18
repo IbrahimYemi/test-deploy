@@ -1,19 +1,23 @@
 // src/components/LoginPage.js
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../config/axiosConfig';
+import { backendURIs, frontendURIs } from '../config/routes';
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleLogin = async (e) => {
+        setIsLoading(true);
         e.preventDefault();
         try {
-            const response = await axios.post('/api/login', { email, password });
-            const { token, user } = response.data;
+            const response = await axios.post(backendURIs.auth.signin, { email, password });
+            const { token, user } = response.data.data;
+            alert(response.data.message);
             if (user && token) {
                 localStorage.setItem('user', JSON.stringify(user));
                 localStorage.setItem('token', token);
@@ -21,16 +25,19 @@ const LoginPage = () => {
                     'token_registered',
                     Date.now().toString()
                 );
-                navigate('/gallery');
+                setIsLoading(false);
+                navigate(frontendURIs.admin);
             }
             setError('Invalid email or password');
+            setIsLoading(false);
         } catch (error) {
             setError('Invalid email or password');
+            setIsLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className={` ${isLoading && 'opacity-20'} min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8`}>
             <div className="max-w-md w-full space-y-8">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -50,7 +57,7 @@ const LoginPage = () => {
                                 type="email"
                                 autoComplete="email"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-[#d3a755] focus:border-[#d3a755] focus:z-10 sm:text-sm"
                                 placeholder="Email address"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -66,7 +73,7 @@ const LoginPage = () => {
                                 type="password"
                                 autoComplete="current-password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-[#d3a755] focus:border-[#d3a755] focus:z-10 sm:text-sm"
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -77,7 +84,7 @@ const LoginPage = () => {
                     <div>
                         <button
                             type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#d3a755] hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d3a755]"
                         >
                             Sign in
                         </button>

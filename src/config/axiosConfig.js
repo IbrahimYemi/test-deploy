@@ -1,10 +1,11 @@
 // src/axiosConfig.js
 import axios from 'axios';
+import { backendURIs } from './routes';
 
 const instance = axios.create({
-  baseURL: 'http://your-api-url.com', // Replace with your API URL
+  baseURL: backendURIs.api,
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'multipart/form-data',
     Accept: 'application/json',
   },
 });

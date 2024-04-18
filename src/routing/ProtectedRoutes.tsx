@@ -42,18 +42,19 @@ setupAxiosInterceptors();
 
 const ProtectedRoute: React.FC = () => {
     const tokenRegisteredString = localStorage.getItem('token_registered');
+    const mainToken = localStorage.getItem('token');
     const tokenRegistered = tokenRegisteredString
         ? parseInt(tokenRegisteredString)
         : null;
 
     // Check if token is present and registered within the last 72 hours
     const auth =
-        !!localStorage.getItem('token') &&
+        !!mainToken &&
         tokenRegistered &&
         Date.now() - tokenRegistered < 72 * 60 * 60 * 1000;
 
     // If token is not valid, remove it from local storage
-    if (!auth) {
+    if (!auth || !mainToken) {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         localStorage.removeItem('token_registered');
