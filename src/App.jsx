@@ -25,16 +25,17 @@ function App() {
             <div className='min-h-screen relative z-10 p-4 bg-gray-300 bg-opacity-10'>
               <Routes>
                 {/* public routes */}
+                <Route path={frontendURIs.home} element={<StartupAnimation />} />
+                <Route path={frontendURIs.gallery} element={<ImageHandler />} />
+
+                {/* auth route */}
                 <Route element={<LoginRoutes />}>
-                  <Route path={frontendURIs.home} element={<StartupAnimation />} />
-                  <Route path={frontendURIs.gallery} element={<ImageHandler />} />
                   <Route path={frontendURIs.login} element={<LoginPage />} />
                   <Route path={frontendURIs.register} element={<RegisterPage />} />
                 </Route>
 
-                {/* private routes */}
+                {/*  auth protected routes */}
                 <Route element={<ProtectedRoutes />}>
-                  {/* admin routes */}
                   <Route path={frontendURIs.admin} element={<AdminPage />} />
                 </Route>
                 <Route path={frontendURIs.notFound} element={<NotFoundPage />} />
