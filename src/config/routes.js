@@ -9,9 +9,8 @@ export const frontendURIs = {
 };
 
 export const backendURIs = {
-    // base: "https://opeyemicouple.skaylrapp.biz",
-    base: "http://127.0.0.1:8000",
-    api: "http://127.0.0.1:8000/api",
+    base: "https://opeyemicouple.skaylrapp.biz",
+    api: "https://opeyemicouple.skaylrapp.biz/api",
     auth: {
         signup: "/register",
         signin: "/login"
