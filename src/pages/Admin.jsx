@@ -178,13 +178,19 @@ const AdminPage = () => {
 
 
     return (
-        <div className={`${isLoading && 'opacity-15'} container mx-auto mt-8 relative`}>
+        <div className="container mx-auto mt-8 relative">
+            {isLoading && (
+                <div
+                    className="absolute inset-0 bg-gray-300 opacity-50 z-10"
+                    style={{ pointerEvents: 'none' }}
+                />
+            )}
             <button onClick={handleLogout} className='absolute top-2 right-2 bg-red-800 hover:bg-[#d3a755] rounded-md text-white px-3 py-2 font-semibold'>
                 Logout
             </button>
             <h1 className="text-3xl font-bold mb-4">Admin Page</h1>
             <h1 className="text-xl font-semibold italic mb-4 capitalize">Hi, {adminNames?.firstName + ' ' + adminNames?.lastName}</h1>
-            
+
             {/* Upload Images */}
             <div className="mb-8">
                 <button
