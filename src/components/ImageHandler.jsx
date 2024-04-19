@@ -160,7 +160,7 @@ const ImageHandler = () => {
             <img
               src={imageSRCHandler(images[selectedIndex].image)}
               alt={`Selected Image ${selectedIndex}`}
-              className="max-w-full w-full h-[70%] rounded-lg"
+              className="max-w-full w-full md:w-auto h-[70%] rounded-lg"
             />
             <div className="flex justify-between items-center w-full mt-5 md:mt-10">
               {selectedIndex > 0 && (
