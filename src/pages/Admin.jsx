@@ -32,11 +32,10 @@ const AdminPage = () => {
         const userData = JSON.parse(userDataString);
 
         // Access the firstName and lastName properties
-        const firstName = userData?.firstName || 'Ope';
-        const lastName = userData?.lastName || 'Yemi';
+        const firstName = userData?.name;
 
         // Set the admin names state
-        setAdminNames({ firstName, lastName });
+        setAdminNames({ firstName });
     }, []);
 
     const toggleSelectImage = (id) => {
@@ -189,7 +188,7 @@ const AdminPage = () => {
                 Logout
             </button>
             <h1 className="text-3xl font-bold mb-4">Admin Page</h1>
-            <h1 className="text-xl font-semibold italic mb-4 capitalize">Hi, {adminNames?.firstName + ' ' + adminNames?.lastName}</h1>
+            <h1 className="text-xl font-semibold italic mb-4 capitalize">Hi, {adminNames?.firstName}</h1>
 
             {/* Upload Images */}
             <div className="mb-8">
