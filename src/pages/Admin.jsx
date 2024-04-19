@@ -97,7 +97,7 @@ const AdminPage = () => {
     };
 
     const handleViewImage = (imageUrl) => {
-        window.open(imageUrl, '_blank');
+        window.open(imageSRCHandler(imageUrl), '_blank');
     };
 
     const handleChangeStatus = (imageHash) => {
