@@ -148,7 +148,7 @@ const ImageHandler = () => {
           onClick={closeImage}
         >
           <button
-            className="absolute top-0 left-0 text-red-800 font-semibold text-2xl px-4 py-2 bg-white rounded-full m-2 flex items-center justify-center"
+            className="absolute bottom-0 left-0 text-red-800 font-semibold text-2xl px-4 py-2 bg-white rounded-full m-2 flex items-center justify-center"
             onClick={(e) => {
               e.stopPropagation();
               goToPrev();
@@ -160,7 +160,7 @@ const ImageHandler = () => {
             <img
               src={imageSRCHandler(images[selectedIndex].image)}
               alt={`Selected Image ${selectedIndex}`}
-              className="max-w-full w-full md:w-auto h-[70%] rounded-lg"
+              className="max-w-full w-full md:w-auto max-h-[70%] h-auto rounded-lg"
             />
             <div className="flex justify-between items-center w-full mt-5 md:mt-10">
               {selectedIndex > 0 && (
@@ -193,7 +193,7 @@ const ImageHandler = () => {
             </div>
           </div>
           <button
-            className="absolute top-0 right-0 text-red-800 font-semibold text-2xl px-4 py-2 bg-white rounded-full m-2 flex items-center justify-center"
+            className="absolute bottom-0 right-0 text-red-800 font-semibold text-2xl px-4 py-2 bg-white rounded-full m-2 flex items-center justify-center"
             onClick={(e) => {
               e.stopPropagation();
               goToNext();
