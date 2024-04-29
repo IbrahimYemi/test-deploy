@@ -18,7 +18,7 @@ const Navbar = () => {
                 src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                 alt="theme"
               />
-              <span className='font-bold text-3xl text-white'>
+              <span className='font-bold text-xl lg:text-3xl text-white'>
                 The Opeyemi&apos;s Affairs
               </span>
             </Link>
