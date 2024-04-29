@@ -1,11 +1,11 @@
 const HeroSection = () => {
   return (
     <div className="bg-white-wine md:py-12 md:px-24 lg:px-32 flex flex-col md:flex-row items-center">
-      <div className="md:w-1/2 mb-8 md:mb-0">
+      <div className="md:w-1/2 mb-8 md:mb-0 flex">
         <img
           src="/couples.jpg"
           alt="Wedding Couple"
-          className="rounded-lg shadow-lg md:h-[70vh] w-auto"
+          className="rounded-lg shadow-lg md:h-[70vh] w-auto mx-auto"
         />
       </div>
       <div className="md:w-1/2 md:pl-8">
